@@ -2,6 +2,8 @@ import React from 'react';
 import Banar from '../Extra-Component/Banar'; 
 import bookingLogo from '../../public/bookingIcon.png'
 import Section from '../Extra-Component/Section';
+import Swiper from '../Extra-Component/Swiper';
+import Details from '../Extra-Component/Details';
 
 const Service = () => {
     return (
@@ -56,7 +58,10 @@ const Service = () => {
   </div>  
 
 
-  <Section></Section>
+  <Section></Section> 
+
+  <Swiper></Swiper> 
+  <Details></Details>
 
 
 
