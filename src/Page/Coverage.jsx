@@ -13,7 +13,7 @@ const Coverage = () => {
            <div className="w-full h-[900px] border">
 
        
-             <MapContainer center={position} zoom={7} scrollWheelZoom={false} className='h-[900px]'>  
+             <MapContainer center={position} zoom={8} scrollWheelZoom={false} className='h-[900px]'>  
 
                 <TileLayer
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

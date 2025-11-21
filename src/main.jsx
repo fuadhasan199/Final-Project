@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router'
 import MainRoot from './Root/MainRoot.jsx'
 import Service from './Page/Service.jsx'
 import Coverage from './Page/Coverage.jsx'
+import Register from './Sign/Register.jsx'
 
 
 const router=createBrowserRouter([
@@ -23,6 +24,10 @@ const router=createBrowserRouter([
       path:'/Coverage',
       element:<Coverage></Coverage>,
       loader: ()=>fetch('/warehouses.json') .then(res=>res.json())
+     } ,
+     {
+      path:'/register',
+      element:<Register></Register>
      }
 
 
