@@ -7,6 +7,8 @@ import MainRoot from './Root/MainRoot.jsx'
 import Service from './Page/Service.jsx'
 import Coverage from './Page/Coverage.jsx'
 import Register from './Sign/Register.jsx'
+import AuthProvider from './Auth/AuthProvider.jsx'
+import Login from './Sign/Login.jsx'
 
 
 const router=createBrowserRouter([
@@ -28,6 +30,10 @@ const router=createBrowserRouter([
      {
       path:'/register',
       element:<Register></Register>
+     },
+     {
+      path:'/login',
+      element:<Login></Login>
      }
 
 
@@ -42,6 +48,8 @@ const router=createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+   <AuthProvider>
+     <RouterProvider router={router}></RouterProvider>
+   </AuthProvider>
   </StrictMode>,
 )
