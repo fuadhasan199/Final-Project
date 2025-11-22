@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import UseAuth from '../Auth/UseAuth';
+import axios from 'axios';
 
 const Register = () => { 
 
@@ -10,9 +11,20 @@ const Register = () => {
 
  const hadleRegister=(data)=>{ 
 
+  const ProfileImg=data.photo[0]
 
 registerUser(data.email,data.password) 
-.then(result=>{
+.then(result=>{ 
+
+ const formData=new FormData()
+ formData.append('image',ProfileImg) 
+
+  const Img_URL=`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_Image_host}`
+ axios.post(Img_URL,formData) 
+ .then(res=>console.log(res.data.data.url))
+
+
+
     console.log(result.user)
 }) 
 
@@ -27,7 +39,27 @@ registerUser(data.email,data.password)
 
     <h2 className="text-3xl font-bold text-center mb-6">Create Account</h2>
 
-    <form onSubmit={handleSubmit(hadleRegister)} className="flex flex-col space-y-4">
+    <form onSubmit={handleSubmit(hadleRegister)} className="flex flex-col space-y-4"> 
+
+   {/* Name Field  */} 
+
+
+   <label className="label">Name</label>
+    <input type="text" {...register('name',{required:true})} className="input" placeholder="Name Please" /> 
+          {
+            errors.name?.type==='required' && <p className='text-red-500'>Name Required</p>
+          }
+ 
+         {/* Photo field */} 
+
+       
+   <label className="label">Photo</label>
+    <input type="file" {...register('photo',{required:true})} className="file-input" placeholder="select photo" /> 
+          {
+            errors.photo?.type==='required' && <p className='text-red-500'>Photo Required</p>
+          }
+
+
 
       {/* Email */}
       <div className="form-control">

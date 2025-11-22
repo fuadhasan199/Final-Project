@@ -25,6 +25,10 @@ const Login = () => {
           <input type="email" {...register('email',{required:true})} className="input" placeholder="Email" /> 
           {
             errors.email?.type==='required' && <p className='text-red-500'>Email Required</p>
+          }    <label className="label">Email</label>
+          <input type="email" {...register('email',{required:true})} className="input" placeholder="Email" /> 
+          {
+            errors.email?.type==='required' && <p className='text-red-500'>Email Required</p>
           }
           <label className="label">Password</label>
           <input type="password"{...register('password',{required:true,minLength:6})} className="input" placeholder="Password" /> 
