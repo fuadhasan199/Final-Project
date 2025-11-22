@@ -9,6 +9,8 @@ import Coverage from './Page/Coverage.jsx'
 import Register from './Sign/Register.jsx'
 import AuthProvider from './Auth/AuthProvider.jsx'
 import Login from './Sign/Login.jsx'
+import About from './Page/About.jsx'
+import Private from './Auth/Private.jsx'
 
 
 const router=createBrowserRouter([
@@ -24,7 +26,9 @@ const router=createBrowserRouter([
      },
      {
       path:'/Coverage',
-      element:<Coverage></Coverage>,
+      element:<Private>
+        <Coverage></Coverage>
+      </Private>,
       loader: ()=>fetch('/warehouses.json') .then(res=>res.json())
      } ,
      {
@@ -34,6 +38,10 @@ const router=createBrowserRouter([
      {
       path:'/login',
       element:<Login></Login>
+     },
+     {
+      path:'/aboutUs', 
+      element:<About></About>,
      }
 
 

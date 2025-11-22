@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import UseAuth from '../Auth/UseAuth';
+import { Link, Navigate } from 'react-router';
 
 const Login = () => { 
 
@@ -17,7 +18,8 @@ const Login = () => {
 
     return (
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl mt-5 mx-auto ">
-      <div className="card-body">
+      <div className="card-body"> 
+        <p>Log In</p>
         <form className="fieldset"onSubmit={handleSubmit(handleLogin)}>
           <label className="label">Email</label>
           <input type="email" {...register('email',{required:true})} className="input" placeholder="Email" /> 
@@ -31,8 +33,9 @@ const Login = () => {
             errors.password?.type==='minLength' && <p className='text-red-500'>Password Reguired and must 6 character</p>
            }
 
-          <div><a className="link link-hover">Forgot password?</a></div>
-          <button className="btn btn-neutral mt-4">Login</button>
+          <div><a className="link link-hover">Forgot password?</a></div> 
+          <p className='text-black mt-2'>Don't have Account <Link to={'/register'} className='text-red-500'>Register</Link> </p>
+          <Link to={'/login'} className='btn  text-gray-700'>Log In</Link>
         </form>
       </div>
     </div>
