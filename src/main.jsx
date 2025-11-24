@@ -11,6 +11,7 @@ import AuthProvider from './Auth/AuthProvider.jsx'
 import Login from './Sign/Login.jsx'
 import About from './Page/About.jsx'
 import Private from './Auth/Private.jsx'
+import Send_Percel from './Page/Send_Percel.jsx'
 
 
 const router=createBrowserRouter([
@@ -43,7 +44,13 @@ const router=createBrowserRouter([
       path:'/aboutUs', 
       element:<About></About>,
      }
-
+     ,
+     {
+      path:'/Send_parcel',
+      element:<Private> 
+        <Send_Percel></Send_Percel>
+      </Private>
+     }
 
 
 
