@@ -1,11 +1,29 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useLoaderData } from 'react-router';
 
 const Send_Percel = () => { 
-   const { register,  handleSubmit, formState: { errors },}=useForm() 
+   const { register,  handleSubmit,watch,formState: { errors },}=useForm() 
+
+   const serviceCenter=useLoaderData() 
+
+   const regionDuplicate=serviceCenter.map(c=>c.region)
+   const regiion=[...new Set(regionDuplicate)]
+   
+   const senderRegion=watch('senderRegion')
+   
+   const DistrictByRegion=region=>{
+     
+    const regionDistrict=serviceCenter.filter(c=>c.region===region)
+
+    const district=regionDistrict.map(d=>d.district) 
+    return district
+
+   }
+  
 
    const handleSendparcel=data=>{
-    console.log(data)
+
    }
 
  return (
@@ -84,9 +102,35 @@ Non‑Document
           <input type="number" {...register('senderPhoneNumber')} className="input" placeholder="+8801******** " />
          
 
+    {/* PICK A REGION */}
+         <fieldset className="fieldset">
+  <legend className="fieldset-legend">Sender Region</legend>
+  <select {...register('senderRegion')} defaultValue="Pick a browser" className="select">
+    <option disabled={true}>Pick a Region</option>
+    
 
-              <label className="label mt-2">Sender District:</label>
-          <input type="text" {...register('senderDistrict')} className="input" placeholder="District Name..." /> 
+    {regiion.map((r,i)=> <option key={i} value={r}>{r}</option>)}
+   
+   
+  </select>
+ 
+</fieldset>  
+                {/* pick a Distrcit */}
+         <fieldset className="fieldset">
+  <legend className="fieldset-legend">Sender District</legend>
+  <select {...register('senderdistrict')} defaultValue="Pick a browser" className="select">
+    <option disabled={true}>Pick a Disctrict  </option>
+    
+
+    {DistrictByRegion(senderRegion).map((r,i)=> <option key={i} value={r}>{r}</option>)}
+   
+   
+  </select>
+ 
+</fieldset>
+
+
+        
 
 
 

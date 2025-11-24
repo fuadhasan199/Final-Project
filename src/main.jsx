@@ -49,7 +49,8 @@ const router=createBrowserRouter([
       path:'/Send_parcel',
       element:<Private> 
         <Send_Percel></Send_Percel>
-      </Private>
+      </Private> ,
+      loader: ()=>fetch('/warehouses.json') .then(res=>res.json())
      }
 
 
