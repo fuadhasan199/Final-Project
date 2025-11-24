@@ -10,7 +10,9 @@ const Send_Percel = () => {
    const regionDuplicate=serviceCenter.map(c=>c.region)
    const regiion=[...new Set(regionDuplicate)]
    
-   const senderRegion=watch('senderRegion')
+   const senderRegion=watch('senderRegion') 
+
+   const receiverRegion=watch('receiverRegion')
    
    const DistrictByRegion=region=>{
      
@@ -22,7 +24,33 @@ const Send_Percel = () => {
    }
   
 
-   const handleSendparcel=data=>{
+   const handleSendparcel=data=>{ 
+
+    const sameDistrict=data.senderdistrict ===data.receiverdistrict 
+
+    const isDocument=data.parcelType ==='document' 
+
+    const parcelWeight=parseFloat(data.parcelWeight) 
+
+    let cost=0 ;
+    if(isDocument){
+       cost=sameDistrict ?60:80
+    } 
+    else{
+       if(parcelWeight <3){
+         cost=sameDistrict ?110:150
+       } 
+       else{
+         const minCharge=sameDistrict?110:150 
+         const extraWeight=parcelWeight-3
+         const extraCharge= sameDistrict?extraWeight*40 :extraWeight * 40 + 40 
+         cost=minCharge+extraCharge
+
+       }
+    }
+       console.log(cost)
+
+    
 
    }
 
@@ -59,6 +87,7 @@ value="non-document"
 Non‑Document
 </label>
 </div> 
+</div>
  
  {/* parcel info /send -weight */} 
 
@@ -136,7 +165,7 @@ Non‑Document
 
         </fieldset>  
 
-          
+{/* RECEIVER DETAILS */}
       <fieldset className="fieldset"> 
                <h3 className="text-2xl font-semibold">Receiver Details</h3> 
 
@@ -152,21 +181,55 @@ Non‑Document
          
 
 
-              <label className="label mt-2">Receiver District:</label>
+              {/* <label className="label mt-2">Receiver District:</label>
           <input type="text" {...register('receiverDistrict')} className="input" placeholder="District Name..." /> 
+ */}
+               
+
+ 
+    {/* PICK A REGION */}
+         <fieldset className="fieldset">
+  <legend className="fieldset-legend">Receiver Region</legend>
+  <select {...register('receiverRegion')} defaultValue="Pick a browser" className="select">
+    <option disabled={true}>Pick a Region</option>
+    
+
+    {regiion.map((r,i)=> <option key={i} value={r}>{r}</option>)}
+   
+   
+  </select>
+ 
+</fieldset>  
+                {/* pick a Distrcit */}
+         <fieldset className="fieldset">
+  <legend className="fieldset-legend">Receiver District</legend>
+  <select {...register('receiverdistrict')} defaultValue="Pick a browser" className="select">
+    <option disabled={true}>Pick a Disctrict  </option>
+    
+
+    {DistrictByRegion(receiverRegion).map((r,i)=> <option key={i} value={r}>{r}</option>)}
+   
+   
+  </select>
+
+
+
+
 
 
 
         </fieldset> 
+        </fieldset>
 
 
 
 
 
-             </div>
+            
 
 
-</div>
+</div> 
+ 
 
 
 
@@ -175,9 +238,10 @@ Non‑Document
 
 
 <button className="w-full bg-blue-600 text-white py-2 mt-5 rounded-xl font-semibold hover:bg-blue-700">Submit</button> 
-</form>
+</form> 
 </div>
 </div>
+
 ); 
 }
 

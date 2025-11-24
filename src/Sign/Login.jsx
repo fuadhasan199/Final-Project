@@ -21,8 +21,8 @@ const Login = () => {
       <div className="card-body"> 
         <p>Log In</p>
         <form className="fieldset"onSubmit={handleSubmit(handleLogin)}>
-          <label className="label">Email</label>
-          <input type="email" {...register('email',{required:true})} className="input" placeholder="Email" /> 
+         
+        
           {
             errors.email?.type==='required' && <p className='text-red-500'>Email Required</p>
           }    <label className="label">Email</label>
