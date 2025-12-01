@@ -1,9 +1,19 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useLoaderData } from 'react-router';
+import Swal from 'sweetalert2';
+import useAxios from '../Auth/useAxios';
 
 const Send_Percel = () => { 
-   const { register,  handleSubmit,watch,formState: { errors },}=useForm() 
+   const { 
+    register, 
+     handleSubmit,
+     watch,
+    //  formState: 
+    //  { errors }
+     }=useForm() 
+
+     const axiosSecure=useAxios()
 
    const serviceCenter=useLoaderData() 
 
@@ -48,7 +58,32 @@ const Send_Percel = () => {
 
        }
     }
-       console.log(cost)
+       console.log(cost) 
+
+     
+Swal.fire({
+  title: "Agree With Send parcel",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Send Parcel"
+}).then((result) => {
+  if (result.isConfirmed) { 
+
+   axiosSecure.post('/parcels',data)
+   .then(res=>{
+    console.log(res.data)
+   })
+
+    // Swal.fire({
+    //   title: "Cancelled",
+    //   text: "Your file has been deleted.",
+    //   icon: "success"
+    // });
+  }
+});
 
     
 
@@ -80,7 +115,7 @@ Document
 
 <label className="flex items-center gap-2">
 <input
-type="radio"
+type="radio" {...register('parcelType')}
 name="parcelType"
 value="non-document"
 />
@@ -123,9 +158,7 @@ Non‑Document
           <label className="label">Sender Name :</label>
           <input type="text" {...register('senderName')} className="input" placeholder="Your Name Please" /> 
 
-              <label className="label">Sender Address:</label>
-          <input type="text" {...register('senderAddress')} className="input" placeholder="Your Address Please" /> 
-
+           
 
                      <label className="label">Phone Number:</label>
           <input type="number" {...register('senderPhoneNumber')} className="input" placeholder="+8801******** " />
@@ -134,7 +167,7 @@ Non‑Document
     {/* PICK A REGION */}
          <fieldset className="fieldset">
   <legend className="fieldset-legend">Sender Region</legend>
-  <select {...register('senderRegion')} defaultValue="Pick a browser" className="select">
+  <select {...register('senderRegion')}  className="select">
     <option disabled={true}>Pick a Region</option>
     
 
@@ -147,7 +180,7 @@ Non‑Document
                 {/* pick a Distrcit */}
          <fieldset className="fieldset">
   <legend className="fieldset-legend">Sender District</legend>
-  <select {...register('senderdistrict')} defaultValue="Pick a browser" className="select">
+  <select {...register('senderdistrict')}  className="select">
     <option disabled={true}>Pick a Disctrict  </option>
     
 
@@ -172,9 +205,7 @@ Non‑Document
           <label className="label">Receiver Name :</label>
           <input type="text" {...register('receiverName')} className="input" placeholder="Receiver Name Please" /> 
 
-              <label className="label">Receiver Address:</label>
-          <input type="text" {...register('receiverAddress')} className="input" placeholder="Receiver Address Please" /> 
-
+           
 
                      <label className="label">Phone Number:</label>
           <input type="number" {...register('receiverPhoneNumber')} className="input" placeholder="+8801******** " />
@@ -190,7 +221,7 @@ Non‑Document
     {/* PICK A REGION */}
          <fieldset className="fieldset">
   <legend className="fieldset-legend">Receiver Region</legend>
-  <select {...register('receiverRegion')} defaultValue="Pick a browser" className="select">
+  <select {...register('receiverRegion')}  className="select">
     <option disabled={true}>Pick a Region</option>
     
 
@@ -203,7 +234,7 @@ Non‑Document
                 {/* pick a Distrcit */}
          <fieldset className="fieldset">
   <legend className="fieldset-legend">Receiver District</legend>
-  <select {...register('receiverdistrict')} defaultValue="Pick a browser" className="select">
+  <select {...register('receiverdistrict')} className="select">
     <option disabled={true}>Pick a Disctrict  </option>
     
 

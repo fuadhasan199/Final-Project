@@ -35,7 +35,9 @@ const handleSignOut=()=>{
               <NavLink to={'/aboutUS'} className={({isActive})=>(isActive ? 'font-bold text-blue-500':'')}>AboutUs</NavLink> 
               <NavLink to={'/Send_parcel'} className={({isActive})=>(isActive ? 'font-bold text-blue-500':'')}>Send Parcel</NavLink> 
        
-   
+            {
+              user && <NavLink to={'/dashboard/myPercels'} className={({isActive})=>(isActive ? 'font-bold text-blue-500':'')}> My Percels </NavLink> 
+            }
     </ul> 
   </div>
   <div className="navbar-end"> 
