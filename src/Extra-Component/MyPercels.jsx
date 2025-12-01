@@ -2,6 +2,7 @@ import React from 'react';
 import UseAuth from '../Auth/UseAuth';
 import useAxios from '../Auth/useAxios';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from 'react-router';
 
 const MyPercels = () => { 
     const {user}=UseAuth()
@@ -28,7 +29,7 @@ const MyPercels = () => {
         <th>Name:</th>
         <th>Cost:</th>
         <th>Sender Address:</th>
-        <th>Action:</th>
+        <th>Payment</th>
       </tr>
     </thead>
     <tbody> 
@@ -38,7 +39,18 @@ const MyPercels = () => {
         <th>{index+1}</th>
         <td>{parcel.parcelName}</td>
         <td>{parcel.senderName}</td>
-        <td>Blue</td>
+        <td>
+            {parcel.paid ? <span className='font-bold bg-blue-400 p-2'>Paid</span> : 
+            
+            
+             <Link to={`/dashboard/payment/${parcel._id}`}>
+              <button className="btn btn-primary btn-sm">pay</button>
+             </Link>
+            
+            
+            } 
+            {/* <span className='font-bold bg-red-500 p-2'>Unpaid</span> */}
+        </td>
       </tr>
 
         ))}

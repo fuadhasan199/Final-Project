@@ -15,6 +15,7 @@ import Send_Percel from './Page/Send_Percel.jsx'
 import Dashboard from './Auth/Dashboard.jsx'
 import MyPercels from './Extra-Component/MyPercels.jsx' 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import Payment from './Extra-Component/Payment/Payment.jsx'
 
 const queryClient = new QueryClient()
 
@@ -70,6 +71,10 @@ const router=createBrowserRouter([
         {
           path:'myPercels',
           element:<MyPercels></MyPercels>
+        } ,
+        {
+          path:'payment/:parcelId',
+          element:<Payment></Payment>
         }
       ]
      }
