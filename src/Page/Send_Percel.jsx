@@ -59,6 +59,7 @@ const Send_Percel = () => {
        }
     }
        console.log(cost) 
+       data.cost=cost ;
 
      
 Swal.fire({
