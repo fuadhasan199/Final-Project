@@ -83,14 +83,24 @@ async function run() {
                 metadata:{
                     parcelId:PaymentInfo.parcelId
                 },
-                success_url: `${process.env.SITE_DOMAIN}/dashboard/payment-success`, 
+               success_url: `${process.env.SITE_DOMAIN}/dashboard/payment-success?session_id={CHECKOUT_SESSION_ID}`,
                    cancel_url: `${process.env.SITE_DOMAIN}/dashboard/payment-failed`
             }); 
             console.log(session) 
             res.send({url:session.url})
 
             // res.redirect(303, session.url);
-        });
+        }); 
+
+     app.patch('/payment-success',async(req,res)=>{
+        const sessionId=req.query.session_id 
+        const session = await stripe.checkout.sessions.retrieve(sessionId); 
+        console.log(session)
+        res.send({success:true})
+     })
+
+
+
 
         // ------------------ API ENDPOINTS END --------------------
 
