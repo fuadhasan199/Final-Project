@@ -16,6 +16,7 @@ import Dashboard from './Auth/Dashboard.jsx'
 import MyPercels from './Extra-Component/MyPercels.jsx' 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Payment from './Extra-Component/Payment/Payment.jsx'
+import PaymentSucces from './Extra-Component/Payment/PaymentSucces.jsx'
 
 const queryClient = new QueryClient()
 
@@ -75,6 +76,10 @@ const router=createBrowserRouter([
         {
           path:'payment/:parcelId',
           element:<Payment></Payment>
+        } , 
+        {
+            path:'payment-success',
+        element:<PaymentSucces></PaymentSucces>   
         }
       ]
      }

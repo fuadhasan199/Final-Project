@@ -18,6 +18,7 @@ const Send_Percel = () => {
    const serviceCenter=useLoaderData() 
 
    const regionDuplicate=serviceCenter.map(c=>c.region)
+
    const regiion=[...new Set(regionDuplicate)]
    
    const senderRegion=watch('senderRegion') 
@@ -40,7 +41,7 @@ const Send_Percel = () => {
 
     const isDocument=data.parcelType ==='document' 
 
-    const parcelWeight=parseFloat(data.parcelWeight) 
+    const parcelWeight=parseFloat(data.parcelWeight)||0
 
     let cost=0 ;
     if(isDocument){
@@ -140,7 +141,7 @@ Non‑Document
 
   <fieldset className="fieldset">
           <label className="label">Parcel Weight :</label>
-          <input type="text" {...register('parcelWeight')} className="input" placeholder="Parcel Parcel Weight" /> 
+          <input type="number" {...register('parcelWeight')} className="input" placeholder="Parcel Parcel Weight" /> 
         </fieldset> 
 
 
@@ -158,6 +159,9 @@ Non‑Document
         <h3 className="text-2xl font-semibold">Sender Details</h3> 
           <label className="label">Sender Name :</label>
           <input type="text" {...register('senderName')} className="input" placeholder="Your Name Please" /> 
+           
+             <label className="label">Sender Email :</label>
+          <input type="email" {...register('senderEmail')} className="input" placeholder="...@gmail.com" /> 
 
            
 
@@ -206,7 +210,14 @@ Non‑Document
           <label className="label">Receiver Name :</label>
           <input type="text" {...register('receiverName')} className="input" placeholder="Receiver Name Please" /> 
 
+              
+
+  <label className="label">Receiver Email :</label>
+          <input type="email" {...register('ReceiverEmail')} className="input" placeholder="...@gmail.com" /> 
+
            
+
+
 
                      <label className="label">Phone Number:</label>
           <input type="number" {...register('receiverPhoneNumber')} className="input" placeholder="+8801******** " />
