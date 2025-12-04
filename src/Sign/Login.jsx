@@ -39,7 +39,7 @@ const Login = () => {
 
           <div><a className="link link-hover">Forgot password?</a></div> 
           <p className='text-black mt-2'>Don't have Account <Link to={'/register'} className='text-red-500'>Register</Link> </p>
-          <Link to={'/login'} className='btn  text-gray-700'>Log In</Link>
+          <button className='btn  text-gray-700'>Log In</button>
         </form>
       </div>
     </div>

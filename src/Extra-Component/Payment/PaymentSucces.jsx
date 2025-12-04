@@ -10,7 +10,7 @@ const PaymentSucces = () => {
 
   useEffect(()=>{
    if(sessionId){
-       axiosSecure.patch(`/payment-success?session_id=${sessionId}`) 
+       axiosSecure.patch(`/payment-success?session_id=${sessionId}`,{}, { timeout:5000} ) 
        .then(res=>{
         console.log(res.data)
        })
