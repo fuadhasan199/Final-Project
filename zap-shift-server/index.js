@@ -33,6 +33,9 @@ async function run() {
 
         const db = client.db('zap_shift');
         const parcelsCollection = db.collection('parcels'); 
+        const paymentscolllection=db.collection('payments')
+            
+       
 
         // ------------------ API ENDPOINTS START ------------------
 
@@ -95,8 +98,36 @@ async function run() {
      app.patch('/payment-success',async(req,res)=>{
         const sessionId=req.query.session_id 
         const session = await stripe.checkout.sessions.retrieve(sessionId); 
-        console.log(session)
-        res.send({success:true})
+       const parcelId=session.metadata.parcelId  
+
+
+    //    refresh e payment jate duibar no hoy 
+    const transactionId=session.payment_intent 
+
+    const query={transactionId:transactionId} 
+    const exitingpayment= await paymentscolllection.findOne(query) 
+
+    if(exitingpayment){
+        return res.send({message:'already paid',transactionId})
+    }
+
+       const paymentData={
+        transactionId:session.payment_intent,
+        sessionId:sessionId,
+        amount:session.amount_total /100,
+        paymentDate:new Date(),
+        senderEmail: session.customer_details.email,
+        parcelId: new ObjectId(parcelId)
+       } 
+       const paymentResult=await paymentscolllection.insertOne(paymentData) 
+       console.log(paymentResult) 
+
+       const updateResult = await parcelsCollection.updateOne(
+        { _id: new ObjectId(parcelId) }, // সঠিক পার্সেল আইডি দিয়ে খুঁজে বের করা
+       
+    ); 
+    res.send({success:true,updateResult})
+
      })
 
 
